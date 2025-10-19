@@ -58,6 +58,18 @@ public class libraryController {
     return libService.getAll();
   }
 
+  @GetMapping("/api/book/{id}")
+  public ResponseEntity<Library> getById(@PathVariable(name = "id") int id) {
+    try {
+
+      return new ResponseEntity<>(libService.getBook(id), HttpStatus.OK);
+    } catch (Exception e) {
+      // TODO: handle exception
+
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+  }
+
   @Transactional
   @PutMapping("/update")
   public void updateLibrary(@RequestBody Library lib) {

@@ -2,6 +2,7 @@ package com.Library.Library;
 
 import java.lang.reflect.Constructor;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,11 @@ public class libraryService {
   public byte[] getImageByReader(String reader) {
     Library l = libRepo.findByReader(reader);
     return l.getImage();
+    // change to list and add findById
+  }
+
+  public Library getBook(int Id) {
+    return libRepo.findById(Id).orElseThrow(NoSuchElementException::new);
   }
 
   public List<Library> getAll() {
